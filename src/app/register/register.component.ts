@@ -13,7 +13,6 @@ export class RegisterComponent {
     surname:['', [Validators.required,]],
     phone:['', [Validators.required,]],
     email:['', [Validators.required, Validators.email]],
-    // docNumber:['', Validators.required],
     password:['', [Validators.required, Validators.minLength(5)]]
   })
   constructor(
@@ -46,7 +45,7 @@ export class RegisterComponent {
             console.error("Email duplicado");
           }else{ // If not registered saves it into the 'db'
           db = [dbLocalStorage];
-          db[db.length]=JSON.stringify(user);
+          db[db.length+1]=JSON.stringify(user);
           localStorage.clear();
           localStorage.setItem('db',db);
         }}

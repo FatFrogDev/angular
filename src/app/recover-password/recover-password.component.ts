@@ -25,6 +25,7 @@ export class RecoverPasswordComponent {
     console.log(toFindUser);
     
     let toCompare=[db];
+    console.log(JSON.parse(JSON.stringify(toCompare)));
     let tomodifyUser;
     let modifieduser=[];
     // console.log(dbParsed);
