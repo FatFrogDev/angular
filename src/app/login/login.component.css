@@ -37,7 +37,7 @@ h2{
     text-align: start;
 }
 
-.login-footer button{
+.login-footer .button{
     display: block;
     background-color: transparent;
     border: 1px solid white;
@@ -52,7 +52,7 @@ h2{
     cursor: pointer;
 }
 
-.login-footer button:hover{
+.login-footer .button:hover{
 background-color: rgba(255, 255, 255, 0.364);
 }
 
@@ -62,9 +62,24 @@ background-color: rgba(255, 255, 255, 0.364);
     font-family:'Courier New', Courier, monospace;
     margin-top: 10px;
     margin-bottom: 7px;
+    text-decoration:none;
 }
 
 .login-footer p{
     word-spacing: 10px;
     text-decoration: none;
+}
+
+.registerBtn{
+    border: none;
+    background-color: transparent;
+    font-size:110%;
+    color: white;
+    font-family:'Courier New', Courier, monospace;
+    margin-top: 10px;
+    margin-bottom: 7px;
+    cursor: pointer;
+}
+.registerBtn:hover{
+    text-decoration:underline;
 }

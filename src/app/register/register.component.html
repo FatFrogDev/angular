@@ -1,20 +1,48 @@
+<form [formGroup]="registerForm" (ngSubmit)="saveUser()">
 <div class="register-container">
     <h2>Registro</h2>
     <div class="input-group">
         <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" id="name" >
+            <input type="text"  
+                    id="name" 
+                    pInputText
+                    formControlName="name"
+                    placeholder="Pepe">
         <label for="apellido">Apellido</label>
-        <input type="text" name="" id="surname">
+            <input type="text" id="surname" 
+                pInputText
+                formControlName="surname"
+                placeholder="Perez"
+                />
         <label for="tel">tel</label>
-        <input type="tel" name="tel" id="phone">
+            <input type="tel" id="phone"
+                pInputNumber
+                formControlName="phone"
+                placeholder="3110213419"
+                />
         <label for="email">Email</label>
-        <input type="email" name="" id="email" />
+            <input type="email" name="" id="email" 
+            pInputText
+            formControlName="email"
+            placeholder="nombre@ejemplo.com"/>
         <label for="password">Contrseña</label>
-        <input type="password" name="" id="password" />
+            <input type="password"   
+            pInputText
+            formControlName="password"
+            placeholder="******" 
+            id="password" />
     </div>
     <div class="register-footer">
-        <button (click)="saveUser()" id="saveUserBtn" type="button" value="register">Registro</button>
+        <button (click)="saveUser()" id="saveUserBtn" class="button" type="button" value="register">Registro</button>
         <p>¿Ya tienes cuenta?</p>
-        <a href="#">Inicia sesión</a>
+        <button (click)="loginRedirect()" class="registerBtn" >Inicia sesión</button>
     </div>
 </div>
+</form>
+
+<!--         <input type="email"
+        pInputText
+        formControlName="email"
+        name="email"
+        placeholder="pepe31@gmail.com"
+        /> -->

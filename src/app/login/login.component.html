@@ -1,21 +1,33 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
 <div class="login-container">
     <h2>Login</h2>
     <div class="input-group">
         <label for="email">Email</label>
-        <input type="email" name="" id="" />
+        <input type="email"
+        pInputText
+        formControlName="email"
+        name="email"
+        placeholder="pepe31@gmail.com"
+        />
+        <small *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors?.['required']">El correo es requerido</div>
+            <div *ngIf="email.errors?.['email']">Ingresa un correo válido</div>
+        </small>
         <label for="password">Contrseña</label>
-        <input type="password" name="" id="" />
+        <input type="password" name="" id="" 
+                pInputText
+                formControlName="password"
+                name="password"
+                placeholder="****"/>
     </div>
     <div class="login-footer">
-        <button type="submit" value="login">login</button>
+        <button type="submit" class="button" value="login">login</button>
         <p>¿No tienes cuenta?</p>
-        <a href="#">regístrate</a>
+        <button (click)="navegar()" class="registerBtn" >Registrarse</button>
         <p><a href="#">¿Olvidaste tu contraseña?</a></p>
     </div>
 </div>
-<button (click)="navegar()" >Registrarse</button>
-<button (click)="saludar()" >Saludar</button>
-<button (click)="mostrarMensaje()" >Mostrar mensaje</button>
+</form>
 <h1>{{ saludo}} </h1>
 <h1>{{ message }}</h1>
 <!-- 

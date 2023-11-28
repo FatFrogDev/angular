@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EmailValidator } from '@angular/forms';
+import { EmailValidator, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
 
@@ -9,52 +9,62 @@ import { catchError } from 'rxjs';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  nombre:String="";
-  apellido:String="";
-  tel:Number=0;
-  email:String="";
-  password:String="";
-
-  ProtoUsuario={
-    nombre:"",
-    apellido:"",
-    tel:0,
-    email:"",
-    password:""
-  }
+  registerForm = this.fb.group({
+    name:[''],
+    surname:[''],
+    phone:[''],
+    email:['', [Validators.required, Validators.email]],
+    password:['', [Validators.minLength(5)]]
+  })
   constructor(
-    public route: Router
+    public route: Router,
+    private fb:FormBuilder
   ){}
-  saveUser(){
-    const saveBtn = document.getElementById("saveUserBtn");
-    saveBtn?.addEventListener("click", ()=>{
-      try{
-        this.nombre=String(document.querySelector("#name")?.innerHTML);
-        console.log(document.querySelector("#name")?.textContent);
-        this.apellido=String(document.querySelector("#surname")?.textContent);
-        this.tel=Number(document.querySelector("#phone")?.textContent);
-        this.email=String(document.querySelector("#email")?.textContent);
-        this.password=String(document.querySelector("#password")?.textContent);
-        // Setting the object typed values by the user
-        this.ProtoUsuario.nombre=String(this.nombre);
-        this.ProtoUsuario.apellido=String(this.apellido);
-        this.ProtoUsuario.tel=Number(this.tel);
-        this.ProtoUsuario.email=String(this.email);
-        this.ProtoUsuario.password=String(this.password);
-        localStorage.setItem('usuario', JSON.stringify(this.ProtoUsuario));
-        console.log(localStorage.getItem('usuario'));
-        
-        // Logica para guardar usuarios 
-        }catch(e){
-          console.log("No se ha podido guardar al usuario, intente verificado los tipos de dato para cada campo");
-        }
-    
-    })
+
+  loginRedirect(){
+    this.route.navigateByUrl('login');
+  }
+  saveUser(){    
+    let user = this.registerForm.value;
+    let db = JSON.parse(JSON.stringify(localStorage.getItem('db')));
+    console.log(db);
+    if(db===null){ // If there's no db, creates a new one and saves it into local storage
+      console.log("is null");
+      db=[];
+      let toPushUser = JSON.stringify(user);
+      db[db.length]=toPushUser;
+      localStorage.clear();
+      localStorage.setItem('db', db);
+    }else{
+      let dbLocalStorage = localStorage.getItem('db');
+      let toCompare = JSON.parse(JSON.stringify(dbLocalStorage));
+       // Verifies if there's any email associated in the 'db'
+      if (toCompare.includes(user.email)){
+        console.error("Email duplicado");
+      }else{ // If not registered saves it into the 'db'
+      db = [dbLocalStorage];
+      db[db.length]=JSON.stringify(user);
+      localStorage.clear();
+      localStorage.setItem('db',db);
+    }
+    }
+  }
+  get name(){
+    return this.registerForm.controls['name'];
+  }
+  get surname(){
+    return this.registerForm.controls['surname'];
+  }
+  get phone(){
+    return this.registerForm.controls['phone'];
+  }
+  get email(){
+    return this.registerForm.controls['email'];
+  }
+  get password(){
+    return this.registerForm.controls['password'];
   }
 }
-//   this.saludo='Esto es un sa'; // navegabilidad, reactividad, almacenamiento en local storage 
-//   // el login valida si los datos existen o no existen
-//   // el register registra los datos en el local storage
   
 //   localStorage.setItem('saludo', JSON.stringify( this.saludo )); //<- String converted
 // }
