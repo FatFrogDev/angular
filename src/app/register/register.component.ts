@@ -28,7 +28,6 @@ export class RegisterComponent {
     let user = this.registerForm.value;
     let db = JSON.parse(JSON.stringify(localStorage.getItem('db')));
     // Verifies that there's no empty field
-    if((user.name==null)||(user.surname==null)||(user.phone==null)||(user.email==null)||(user.password==null)){
       if(db===null){ // If there's no db, creates a new one and saves it into local storage
         console.log("is null");
         db=[];
@@ -51,10 +50,8 @@ export class RegisterComponent {
           localStorage.clear();
           localStorage.setItem('db',db);
         }}
-    }else{
-      alert("llene todos los campos");
-      window.location.reload();
-}}
+    }
+
   get name(){
     return this.registerForm.controls['name'];
   }

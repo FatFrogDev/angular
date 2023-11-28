@@ -21,34 +21,29 @@ export class RecoverPasswordComponent {
   recoverPassword(){
     const db = localStorage.getItem('db');
     console.log(db);
-    
     const toFindUser=this.recoverForm.value;
-    let phone = toFindUser.phone;
+    console.log(toFindUser);
+    
     let toCompare=[db];
     let tomodifyUser;
     let modifieduser=[];
     // console.log(dbParsed);
     
     for(let index=0; index<toCompare.length;index++){
-      if(toCompare[index]?.includes(String(phone))){
+      if(toCompare[index]?.includes(String(toFindUser.phone))){
         tomodifyUser=index;
         modifieduser=[toCompare[index]];
-        console.log("To modify user "+tomodifyUser);
-        
+        let finalUser =JSON.parse(modifieduser.toString());
+        finalUser.password=toFindUser.password;
+        console.log(JSON.stringify(finalUser));
+        toCompare[tomodifyUser]=JSON.stringify(finalUser);
+        console.log("aaaaaaaa"+toCompare);
+        localStorage.clear();
+        localStorage.setItem('db',toCompare.toString());
+
         break;
       }       
     }
-  }
-
-  getUser(index:number){
-    const db = localStorage.getItem('db');
-    let toCompare = JSON.parse(JSON.stringify(db));
-    console.log(toCompare);
-    
-
-
-    //console.log(user);
-    
     
   }
 }
