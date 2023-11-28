@@ -10,8 +10,8 @@
         placeholder="pepe31@gmail.com"
         />
         <small *ngIf="email.invalid && (email.dirty || email.touched)">
-            <div *ngIf="email.errors?.['required']">El correo es requerido</div>
-            <div *ngIf="email.errors?.['email']">Ingresa un correo válido</div>
+            <div class="errors-validator" *ngIf="email.errors?.['required']">El correo es requerido</div>
+            <div class="errors-validator" *ngIf="email.errors?.['email']">Ingresa un correo válido</div>
         </small>
         <label for="password">Contrseña</label>
         <input type="password" name="" id="" 

@@ -6,7 +6,7 @@ import { RecoverPasswordComponent } from './recover-password/recover-password.co
 import { HomePageComponent } from './home-page/home-page.component';
 
 const routes: Routes = [
-  { path:'', component: HomePageComponent },
+  { path:'', component: LoginComponent },
   { path:'login', component : LoginComponent },
   {path:'register', component : RegisterComponent},
   {path:'recover-password', component : RecoverPasswordComponent},

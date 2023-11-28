@@ -39,9 +39,13 @@ export class LoginComponent {
   login(){
     const db = localStorage.getItem('db');
     let user = this.loginForm.value;
+    user.email?.toLowerCase();
+    console.log(JSON.stringify(db));
     let toCompare = [db]; 
     for(let index=0;index<=toCompare.length;index++){
-      if (toCompare[index]?.includes(JSON.stringify(user.email)) && toCompare[index]?.includes(JSON.stringify(user.password))){
+      let email =JSON.stringify(user.email);
+      let password =JSON.stringify(user.password);
+      if (toCompare[index]?.includes(email) && toCompare[index]?.includes(password)){
           this.homePage();
       }else{
         console.error("Usuario no registrado");
